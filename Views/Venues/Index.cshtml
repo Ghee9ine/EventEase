@@ -1,39 +1,35 @@
 @model IEnumerable<EventEase.Models.Venue>
 
-@{
-    ViewData["Title"] = "Venues";
-}
-
-<h1>Venues</h1>
+<h2>Venue List</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New Venue</a>
+    <a href="/Venues/Create">Add New Venue</a>
 </p>
 
-<table class="table table-striped">
+<table border="1" cellpadding="10">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>Location</th>
             <th>Capacity</th>
-            <th>Available</th>
-            <th>Created</th>
-            <th></th>
+            <th>Available?</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Location)</td>
-                <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
+                <td>@item.VenueId</td>
+                <td>@item.Name</td>
+                <td>@item.Location</td>
+                <td>@item.Capacity</td>
                 <td>@(item.IsAvailable ? "Yes" : "No")</td>
-                <td>@item.CreatedAt.ToShortDateString()</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.VenueId" class="btn btn-sm btn-warning">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.VenueId" class="btn btn-sm btn-info">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.VenueId" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="/Venues/Edit/@item.VenueId">Edit</a> |
+                    <a href="/Venues/Details/@item.VenueId">Details</a> |
+                    <a href="/Venues/Delete/@item.VenueId" onclick="return confirm('Are you sure?')">Delete</a>
                  </td>
             </tr>
         }

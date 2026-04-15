@@ -134,3 +134,4 @@ C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\refint\EventEase.dll
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.pdb
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.genruntimeconfig.cache
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\ref\EventEase.dll
+C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.sourcelink.json

@@ -2,7 +2,7 @@
 
 <h2>Create New Venue</h2>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <div>
         <label>Venue Name:</label><br />
         <input asp-for="Name" required />
@@ -16,8 +16,8 @@
         <input asp-for="Capacity" type="number" required />
     </div>
     <div>
-        <label>Image URL (optional):</label><br />
-        <input asp-for="ImageUrl" />
+        <label>Venue Image:</label><br />
+        <input type="file" name="imageFile" accept="image/*" />
     </div>
     <div>
         <input asp-for="IsAvailable" type="checkbox" />

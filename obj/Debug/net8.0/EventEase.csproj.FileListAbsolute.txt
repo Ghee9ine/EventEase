@@ -135,3 +135,9 @@ C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.pdb
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.genruntimeconfig.cache
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\ref\EventEase.dll
 C:\Users\user\EventEase\EventEase\obj\Debug\net8.0\EventEase.sourcelink.json
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\Azure.Storage.Blobs.dll
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\Azure.Storage.Common.dll
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\System.ClientModel.dll
+C:\Users\user\EventEase\EventEase\bin\Debug\net8.0\System.IO.Hashing.dll

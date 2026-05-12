@@ -1,216 +1,118 @@
-\# EventEase - Venue Booking System
+markdown
+# EventEase - Venue Booking System
 
+## Part 2 Assignment Submission
 
+**Student Name:** Ghee9ine
+**Student ID:** ST10455091
+**Student Number:** ST10455091
 
-\## Part 1 Assignment Submission
+**YouTube Video Part 2:** https://youtu.be/-EGCztiLlHY
 
+---
 
+## Part 2 New Features
 
-\*\*Student Name:\*\* Ghee9ine
+### Azure Blob Storage with Azurite
+- Images are now stored locally using Azurite emulator
+- Simulates Azure Blob Storage without cloud costs
+- Images saved to `venue-images` container
+- Verified using Azure Storage Explorer
 
-\*\*Student ID:\*\* ST10455091
+### Enhanced Error Handling
+- Double booking prevention - cannot book same venue at same time
+- Delete restrictions - cannot delete venues with existing events
+- User-friendly error messages with alerts
+- Application does not crash on common user errors
 
+### Search Functionality
+- Search bookings by Booking ID or Event Name
+- Case-insensitive search working
+- Real-time results display
 
+### Consolidated Booking View
+- Shows all booking information in one page
+- Includes venue name, event name, customer details
+- Easy to read table format
 
-\*\*YouTube Video Walkthrough:\*\* https://youtu.be/-EGCztiLlHY
+---
 
+## Technologies Used
 
+- ASP.NET Core MVC (.NET 8.0)
+- Entity Framework Core
+- SQL LocalDB
+- C# / Razor Views
+- Azure Storage Blobs (Azurite emulator)
+- Azure Storage Explorer
 
-\---
+---
 
+## How to Run Locally
 
+1. Clone the repository:
+git clone https://github.com/Ghee9ine/EventEase.git
+cd EventEase
 
-\## Project Description
+text
 
-EventEase is an event management system for booking specialists. This is Part 1 of the project focusing on local development with ASP.NET Core MVC and SQL LocalDB.
+2. Start Azurite (separate terminal):
+azurite --silent --location C:\azurite --skipApiVersionCheck
 
+text
 
+3. Run the application:
+dotnet run
 
-\---
+text
 
+4. Open browser to `http://localhost:5263`
 
+---
 
-\## Features Implemented (Part 1)
+## Features Implemented
 
-\- Venue Management (CRUD operations)
+### Part 1 (Complete)
+- Venue Management (CRUD operations)
+- Database with Venue, Event, Booking tables
+- Local SQL LocalDB persistence
 
-\- Database with Venue, Event, Booking tables
+### Part 2 (Complete)
+- Image upload to Azurite blob storage
+- Double booking validation
+- Delete restriction for venues with events
+- Search functionality for bookings
+- Consolidated booking view
 
-\- Local SQL LocalDB persistence
+---
 
-\- Prevent double bookings
+## Screenshots
 
-\- Restrict deletion of venues with existing events
+### Azure Storage Explorer showing uploaded images
+![Azure Storage Explorer](screenshots/azure-storage.png)
 
+### Venue with uploaded image
+![Venue Image](screenshots/venue-image.png)
 
+### Search functionality
+![Search](screenshots/search.png)
 
-\---
+### Error handling
+![Error Message](screenshots/error.png)
 
+---
 
+## Submission Links
 
-\## Technologies Used
+**GitHub Repository:** https://github.com/Ghee9ine/EventEase
 
-\- ASP.NET Core MVC (.NET 8.0)
+**YouTube Video Part 2:** https://youtu.be/-EGCztiLlHY
 
-\- Entity Framework Core
+---
 
-\- SQL LocalDB
+## Student Information
 
-\- C# / Razor Views
-
-
-
-\---
-
-
-
-\## How to Run Locally
-
-
-
-1\. Clone the repository:
-
-&#x20;  git clone https://github.com/Ghee9ine/EventEase.git
-
-&#x20;  cd EventEase
-
-
-
-2\. Install dependencies:
-
-&#x20;  dotnet restore
-
-
-
-3\. Update connection string in appsettings.json if needed
-
-
-
-4\. Run the application:
-
-&#x20;  dotnet run
-
-
-
-5\. Open browser to http://localhost:5263
-
-
-
-\---
-
-
-
-\## Database Schema
-
-\- Venues - VenueId, Name, Location, Capacity, ImageUrl, IsAvailable, CreatedAt
-
-\- Events - EventId, Name, Description, StartDate, EndDate, Status, VenueId (FK)
-
-\- Bookings - BookingId, BookingReference, CustomerName, CustomerEmail, CustomerPhone, BookingDate, Status, EventId (FK)
-
-
-
-\---
-
-
-
-\## Cloud Computing Answers (Part 1)
-
-
-
-\### Question 1: On-premises vs Cloud Deployment
-
-
-
-Security:
-
-\- On-premises: Full control but full responsibility for security
-
-\- Cloud: Shared responsibility model, provider secures infrastructure
-
-
-
-Deployment Speed:
-
-\- On-premises: Takes weeks or months to get hardware
-
-\- Cloud: Takes minutes or hours to deploy
-
-
-
-Resource Management:
-
-\- On-premises: Fixed capacity, pay for peak usage
-
-\- Cloud: Elastic scaling, pay only for what you use
-
-
-
-\### Question 2: IaaS vs PaaS vs SaaS
-
-
-
-IaaS (Infrastructure as a Service):
-
-\- Provides virtual machines, storage, networks
-
-\- You manage OS, middleware, apps, data
-
-\- Example: Azure Virtual Machines
-
-
-
-PaaS (Platform as a Service):
-
-\- Provides development platform + infrastructure
-
-\- You manage applications and data only
-
-\- Example: Azure App Service
-
-
-
-SaaS (Software as a Service):
-
-\- Provides complete application
-
-\- You just use the software
-
-\- Example: Gmail, Office 365
-
-
-
-Why EventEase should use PaaS:
-
-EventEase should use PaaS because it allows the team to focus on building booking features without managing servers. PaaS scales automatically during peak event seasons and reduces operational costs compared to IaaS. It is also easier to maintain than on-premises solutions.
-
-
-
-\---
-
-
-
-\## GitHub Repository
-
-https://github.com/Ghee9ine/EventEase
-
-
-
-\## Video Demo
-
-https://youtu.be/-EGCztiLlHY
-
-
-
-\---
-
-
-
-\*\*Course:\*\* ASP.NET Core MVC - EventEase Project
-
-\*\*Part:\*\* 1 of 3
-
-\*\*Student ID:\*\* ST10455091
-
-\*\*Date:\*\* April 2026
-
+**Student ID:** ST10455091
+**Course:** ASP.NET Core MVC - EventEase Project
+**Part:** 2 of 3
+**Date:** May 2026

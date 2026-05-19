@@ -14,6 +14,7 @@ public class EventsController : Controller
         _context = context;
     }
 
+    // GET: Events
     public async Task<IActionResult> Index()
     {
         var events = await _context.Events
@@ -22,107 +23,82 @@ public class EventsController : Controller
         return View(events);
     }
 
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null) return NotFound();
-
-        var eventItem = await _context.Events
-            .Include(e => e.Venue)
-            .FirstOrDefaultAsync(m => m.EventId == id);
-            
-        if (eventItem == null) return NotFound();
-
-        return View(eventItem);
-    }
-
+    // GET: Events/Create
     public IActionResult Create()
     {
         ViewBag.Venues = _context.Venues.ToList();
         return View();
     }
 
+    // POST: Events/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Event eventItem)
+    public async Task<IActionResult> Create(Event newEvent)
     {
         // Check for double booking
-        bool isDoubleBooked = await _context.Events
-            .AnyAsync(e => e.VenueId == eventItem.VenueId &&
-                           e.StartDate < eventItem.EndDate &&
-                           e.EndDate > eventItem.StartDate);
+        bool isBooked = await _context.Events.AnyAsync(e => 
+            e.VenueId == newEvent.VenueId &&
+            ((newEvent.StartDate >= e.StartDate && newEvent.StartDate < e.EndDate) ||
+             (newEvent.EndDate > e.StartDate && newEvent.EndDate <= e.EndDate) ||
+             (newEvent.StartDate <= e.StartDate && newEvent.EndDate >= e.EndDate)));
 
-        if (isDoubleBooked)
+        if (isBooked)
         {
-            ModelState.AddModelError("", "This venue is already booked for the selected time period!");
+            ViewBag.Error = "This venue is already booked for these dates and times!";
             ViewBag.Venues = _context.Venues.ToList();
-            return View(eventItem);
+            return View(newEvent);
         }
 
         if (ModelState.IsValid)
         {
-            eventItem.Status = "Scheduled";
-            _context.Add(eventItem);
+            newEvent.Status = "Scheduled";
+            _context.Events.Add(newEvent);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Event created successfully!";
             return RedirectToAction(nameof(Index));
         }
         
         ViewBag.Venues = _context.Venues.ToList();
-        return View(eventItem);
+        return View(newEvent);
     }
 
+    // GET: Events/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null) return NotFound();
-
+        
         var eventItem = await _context.Events.FindAsync(id);
         if (eventItem == null) return NotFound();
-        
-        // Check if event has a booking
-        var hasBooking = await _context.Bookings.AnyAsync(b => b.EventId == id);
-        if (hasBooking)
-        {
-            TempData["Error"] = "Cannot edit event with an existing booking!";
-            return RedirectToAction(nameof(Index));
-        }
         
         ViewBag.Venues = _context.Venues.ToList();
         return View(eventItem);
     }
 
+    // POST: Events/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Event eventItem)
     {
         if (id != eventItem.EventId) return NotFound();
 
-        // Check for double booking
-        bool isDoubleBooked = await _context.Events
-            .AnyAsync(e => e.VenueId == eventItem.VenueId &&
-                           e.EventId != eventItem.EventId &&
-                           e.StartDate < eventItem.EndDate &&
-                           e.EndDate > eventItem.StartDate);
+        // Check for double booking (excluding current event)
+        bool isBooked = await _context.Events.AnyAsync(e => 
+            e.EventId != id &&
+            e.VenueId == eventItem.VenueId &&
+            ((eventItem.StartDate >= e.StartDate && eventItem.StartDate < e.EndDate) ||
+             (eventItem.EndDate > e.StartDate && eventItem.EndDate <= e.EndDate) ||
+             (eventItem.StartDate <= e.StartDate && eventItem.EndDate >= e.EndDate)));
 
-        if (isDoubleBooked)
+        if (isBooked)
         {
-            ModelState.AddModelError("", "This venue is already booked for the selected time period!");
+            ViewBag.Error = "This venue is already booked for these dates and times!";
             ViewBag.Venues = _context.Venues.ToList();
             return View(eventItem);
         }
 
         if (ModelState.IsValid)
         {
-            try
-            {
-                _context.Update(eventItem);
-                await _context.SaveChangesAsync();
-                TempData["Success"] = "Event updated successfully!";
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(eventItem.EventId)) return NotFound();
-                else throw;
-            }
+            _context.Update(eventItem);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         
@@ -130,43 +106,28 @@ public class EventsController : Controller
         return View(eventItem);
     }
 
+    // GET: Events/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null) return NotFound();
-
+        
         var eventItem = await _context.Events
             .Include(e => e.Venue)
-            .Include(e => e.Booking)
-            .FirstOrDefaultAsync(m => m.EventId == id);
+            .FirstOrDefaultAsync(e => e.EventId == id);
             
         if (eventItem == null) return NotFound();
-
-        if (eventItem.Booking != null)
-        {
-            TempData["Error"] = "Cannot delete event with an existing booking!";
-            return RedirectToAction(nameof(Index));
-        }
-
+        
         return View(eventItem);
     }
 
+    // POST: Events/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var eventItem = await _context.Events.FindAsync(id);
-        if (eventItem != null)
-        {
-            _context.Events.Remove(eventItem);
-            await _context.SaveChangesAsync();
-            TempData["Success"] = "Event deleted successfully!";
-        }
-        
+        _context.Events.Remove(eventItem);
+        await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
-    }
-
-    private bool EventExists(int id)
-    {
-        return _context.Events.Any(e => e.EventId == id);
     }
 }

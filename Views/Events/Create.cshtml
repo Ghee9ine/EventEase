@@ -1,0 +1,31 @@
+@model EventEase.Models.Event
+
+<h2>Create Event</h2>
+
+<form method="post">
+    <div>
+        <label>Event Name:</label><br />
+        <input asp-for="Name" required />
+    </div>
+    <div>
+        <label>Description:</label><br />
+        <textarea asp-for="Description"></textarea>
+    </div>
+    <div>
+        <label>Start Date:</label><br />
+        <input asp-for="StartDate" type="datetime-local" required />
+    </div>
+    <div>
+        <label>End Date:</label><br />
+        <input asp-for="EndDate" type="datetime-local" required />
+    </div>
+    <div>
+        <label>Venue:</label><br />
+        <select asp-for="VenueId" asp-items="@(new SelectList(ViewBag.Venues, "VenueId", "Name"))">
+            <option value="">Select Venue</option>
+        </select>
+    </div>
+    <br />
+    <button type="submit">Create Event</button>
+    <a href="/Events">Cancel</a>
+</form>

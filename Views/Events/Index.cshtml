@@ -1,0 +1,37 @@
+@model IEnumerable<EventEase.Models.Event>
+
+<h2>Events</h2>
+
+<p>
+    <a href="/Events/Create">Create New Event</a>
+</p>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Venue</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Venue?.Name</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td>@item.Status</td>
+                <td>
+                    <a href="/Events/Edit/@item.EventId">Edit</a> |
+                    <a href="/Events/Details/@item.EventId">Details</a> |
+                    <a href="/Events/Delete/@item.EventId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

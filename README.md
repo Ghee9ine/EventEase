@@ -1,61 +1,52 @@
 # EventEase - Venue Booking System
 
-## Part 1 Assignment Submission
-
-**Student Name:** Ghee9ine
 **Student ID:** ST10455091
-**YouTube Video:** https://youtu.be/-EGCztiLlHY
+**GitHub:** https://github.com/Ghee9ine/EventEase
 
 ---
 
-## Project Description
+## Part 2 Submission
 
-EventEase is an event management system for booking specialists. This is Part 1 focusing on local development with ASP.NET Core MVC and SQL LocalDB.
+### Features Implemented
+
+**Azure Blob Storage (Azurite)**
+- Images stored locally using Azurite emulator
+- Simulates Azure Blob Storage without cloud costs
+- Images saved to `venue-images` container
+- Verified using Azure Storage Explorer
+
+**Error Handling & Validation**
+- Double booking prevention - cannot book same venue at same time
+- Cannot delete venues that have existing events
+- Cannot delete events that have existing bookings
+- User-friendly error messages displayed
+
+**Enhanced Display**
+- Consolidated booking view showing venue, event, and customer info together
+- Events with start and end date pickers
+- Images display correctly on website
+
+**Search Functionality**
+- Search bookings by Booking ID or Event Name
+- Real-time results filtering
 
 ---
 
-## Features Implemented
+## How to Run
 
-- Venue Management (Create, Read, Update, Delete)
-- Database with Venue, Event, Booking tables
-- Local SQL LocalDB persistence
-- Prevent double bookings
-- Restrict deletion of venues with existing events
-
----
-
-## Technologies Used
-
-- ASP.NET Core MVC (.NET 8.0)
-- Entity Framework Core
-- SQL LocalDB
-- C# / Razor Views
-
----
-
-## How to Run Locally
-
-1. Clone the repository:
-git clone https://github.com/Ghee9ine/EventEase.git
-cd EventEase
-
-text
-
-2. Run the application:
-dotnet run
-
-text
-
-3. Open browser to `http://localhost:5263`
+1. Clone the repository
+2. Start Azurite: `azurite --silent --location C:\azurite --skipApiVersionCheck`
+3. Run the app: `dotnet run`
+4. Open browser to `http://localhost:5263`
 
 ---
 
 ## Links
 
-**GitHub:** https://github.com/Ghee9ine/EventEase
-**Video:** https://youtu.be/-EGCztiLlHY
+- **GitHub:** https://github.com/Ghee9ine/EventEase
+- **Part 2 Video:** [Link to your video]
 
 ---
 
 **Student ID:** ST10455091
-**Date:** April 2026
+**Date:** May 2026

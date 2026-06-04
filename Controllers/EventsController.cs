@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EventEase.Data;
 using EventEase.Models;
@@ -19,57 +19,80 @@ public class EventsController : Controller
     {
         var events = await _context.Events
             .Include(e => e.Venue)
+            .Include(e => e.EventType)
             .ToListAsync();
         return View(events);
+    }
+
+    // GET: Events/AdvancedSearch
+    public async Task<IActionResult> AdvancedSearch(string searchTerm, int? eventTypeId, DateTime? startDateFrom, DateTime? startDateTo, bool? venueAvailableOnly)
+    {
+        var viewModel = new SearchViewModel
+        {
+            SearchTerm = searchTerm,
+            EventTypeId = eventTypeId,
+            StartDateFrom = startDateFrom,
+            StartDateTo = startDateTo,
+            VenueAvailableOnly = venueAvailableOnly,
+            EventTypes = await _context.EventTypes.ToListAsync()
+        };
+
+        var query = _context.Events
+            .Include(e => e.Venue)
+            .Include(e => e.EventType)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+            query = query.Where(e => e.Name.Contains(searchTerm) || e.Description.Contains(searchTerm));
+
+        if (eventTypeId.HasValue && eventTypeId > 0)
+            query = query.Where(e => e.EventTypeId == eventTypeId);
+
+        if (startDateFrom.HasValue)
+            query = query.Where(e => e.StartDate >= startDateFrom);
+
+        if (startDateTo.HasValue)
+            query = query.Where(e => e.EndDate <= startDateTo);
+
+        if (venueAvailableOnly == true)
+            query = query.Where(e => e.Venue != null && e.Venue.IsAvailable);
+
+        viewModel.Events = await query.ToListAsync();
+        return View(viewModel);
     }
 
     // GET: Events/Create
     public IActionResult Create()
     {
         ViewBag.Venues = _context.Venues.ToList();
+        ViewBag.EventTypes = _context.EventTypes.ToList();
         return View();
     }
 
     // POST: Events/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Event newEvent)
+    public async Task<IActionResult> Create(Event eventItem)
     {
-        // Check for double booking
-        bool isBooked = await _context.Events.AnyAsync(e => 
-            e.VenueId == newEvent.VenueId &&
-            ((newEvent.StartDate >= e.StartDate && newEvent.StartDate < e.EndDate) ||
-             (newEvent.EndDate > e.StartDate && newEvent.EndDate <= e.EndDate) ||
-             (newEvent.StartDate <= e.StartDate && newEvent.EndDate >= e.EndDate)));
-
-        if (isBooked)
-        {
-            ViewBag.Error = "This venue is already booked for these dates and times!";
-            ViewBag.Venues = _context.Venues.ToList();
-            return View(newEvent);
-        }
-
         if (ModelState.IsValid)
         {
-            newEvent.Status = "Scheduled";
-            _context.Events.Add(newEvent);
+            _context.Add(eventItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
         ViewBag.Venues = _context.Venues.ToList();
-        return View(newEvent);
+        ViewBag.EventTypes = _context.EventTypes.ToList();
+        return View(eventItem);
     }
 
     // GET: Events/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null) return NotFound();
-        
         var eventItem = await _context.Events.FindAsync(id);
         if (eventItem == null) return NotFound();
-        
         ViewBag.Venues = _context.Venues.ToList();
+        ViewBag.EventTypes = _context.EventTypes.ToList();
         return View(eventItem);
     }
 
@@ -79,30 +102,14 @@ public class EventsController : Controller
     public async Task<IActionResult> Edit(int id, Event eventItem)
     {
         if (id != eventItem.EventId) return NotFound();
-
-        // Check for double booking (excluding current event)
-        bool isBooked = await _context.Events.AnyAsync(e => 
-            e.EventId != id &&
-            e.VenueId == eventItem.VenueId &&
-            ((eventItem.StartDate >= e.StartDate && eventItem.StartDate < e.EndDate) ||
-             (eventItem.EndDate > e.StartDate && eventItem.EndDate <= e.EndDate) ||
-             (eventItem.StartDate <= e.StartDate && eventItem.EndDate >= e.EndDate)));
-
-        if (isBooked)
-        {
-            ViewBag.Error = "This venue is already booked for these dates and times!";
-            ViewBag.Venues = _context.Venues.ToList();
-            return View(eventItem);
-        }
-
         if (ModelState.IsValid)
         {
             _context.Update(eventItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
         ViewBag.Venues = _context.Venues.ToList();
+        ViewBag.EventTypes = _context.EventTypes.ToList();
         return View(eventItem);
     }
 
@@ -110,13 +117,11 @@ public class EventsController : Controller
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null) return NotFound();
-        
         var eventItem = await _context.Events
             .Include(e => e.Venue)
-            .FirstOrDefaultAsync(e => e.EventId == id);
-            
+            .Include(e => e.EventType)
+            .FirstOrDefaultAsync(m => m.EventId == id);
         if (eventItem == null) return NotFound();
-        
         return View(eventItem);
     }
 
@@ -126,7 +131,8 @@ public class EventsController : Controller
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var eventItem = await _context.Events.FindAsync(id);
-        _context.Events.Remove(eventItem);
+        if (eventItem != null)
+            _context.Events.Remove(eventItem);
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }

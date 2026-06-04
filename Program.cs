@@ -1,14 +1,14 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using EventEase.Data;
 using EventEase.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add MVC and API controllers
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();   // for API controllers
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Register Blob Service
 builder.Services.AddSingleton<BlobService>();
 
 var app = builder.Build();
@@ -24,8 +24,8 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// Map both MVC and API routes
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();   // required for API endpoints
 
 app.Run();

@@ -1,0 +1,53 @@
+@model EventEase.Models.Event
+
+<h2>Edit Event</h2>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red;">@ViewBag.Error</p>
+}
+
+<form method="post">
+    <input type="hidden" asp-for="EventId" />
+    
+    <div>
+        <label>Event Name:</label><br />
+        <input asp-for="Name" required />
+    </div>
+    
+    <div>
+        <label>Description:</label><br />
+        <textarea asp-for="Description"></textarea>
+    </div>
+    
+    <div>
+        <label>Start Date:</label><br />
+        <input asp-for="StartDate" type="datetime-local" required />
+    </div>
+    
+    <div>
+        <label>End Date:</label><br />
+        <input asp-for="EndDate" type="datetime-local" required />
+    </div>
+    
+    <div>
+        <label>Venue:</label><br />
+        <select asp-for="VenueId" required>
+            @foreach (var venue in ViewBag.Venues)
+            {
+                if (venue.VenueId == Model.VenueId)
+                {
+                    <option value="@venue.VenueId" selected>@venue.Name</option>
+                }
+                else
+                {
+                    <option value="@venue.VenueId">@venue.Name</option>
+                }
+            }
+        </select>
+    </div>
+    
+    <br />
+    <button type="submit">Update Event</button>
+    <a href="/Events">Cancel</a>
+</form>

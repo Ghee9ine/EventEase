@@ -1,0 +1,37 @@
+@model IEnumerable<EventEase.Models.Venue>
+
+<h2>Venue List</h2>
+
+<p>
+    <a href="/Venues/Create">Add New Venue</a>
+</p>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Available?</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.VenueId</td>
+                <td>@item.Name</td>
+                <td>@item.Location</td>
+                <td>@item.Capacity</td>
+                <td>@(item.IsAvailable ? "Yes" : "No")</td>
+                <td>
+                    <a href="/Venues/Edit/@item.VenueId">Edit</a> |
+                    <a href="/Venues/Details/@item.VenueId">Details</a> |
+                    <a href="/Venues/Delete/@item.VenueId" onclick="return confirm('Are you sure?')">Delete</a>
+                 </td>
+            </tr>
+        }
+    </tbody>
+</table>

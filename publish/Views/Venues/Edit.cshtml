@@ -1,0 +1,32 @@
+@model EventEase.Models.Venue
+
+<h2>Edit Venue</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="VenueId" />
+    <input type="hidden" asp-for="CreatedAt" />
+    
+    <div>
+        <label>Venue Name:</label><br />
+        <input asp-for="Name" required />
+    </div>
+    <div>
+        <label>Location:</label><br />
+        <input asp-for="Location" required />
+    </div>
+    <div>
+        <label>Capacity:</label><br />
+        <input asp-for="Capacity" type="number" required />
+    </div>
+    <div>
+        <label>Image URL:</label><br />
+        <input asp-for="ImageUrl" />
+    </div>
+    <div>
+        <input asp-for="IsAvailable" type="checkbox" />
+        <label>Available for booking</label>
+    </div>
+    <br />
+    <button type="submit">Update</button>
+    <a href="/Venues">Back</a>
+</form>

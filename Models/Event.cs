@@ -1,3 +1,4 @@
+﻿using EventEase.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,5 +29,7 @@ namespace EventEase.Models
         public virtual Venue? Venue { get; set; }
 
         public Booking? Booking { get; set; }
+	public int EventTypeId { get; set; }
+	public EventType? EventType { get; set; }
     }
 }

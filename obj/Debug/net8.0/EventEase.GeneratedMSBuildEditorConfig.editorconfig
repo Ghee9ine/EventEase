@@ -18,12 +18,112 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\user\EventEase\EventEase
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/user/EventEase/EventEase/publish/Views/Bookings/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xCb29raW5nc1xDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Bookings/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xCb29raW5nc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Bookings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xCb29raW5nc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/AdvancedSearch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcQWR2YW5jZWRTZWFyY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Events/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xFdmVudHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xIb21lXFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xTaGFyZWRcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xTaGFyZWRcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Venues/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xWZW51ZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Venues/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xWZW51ZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Venues/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xWZW51ZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Venues/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xWZW51ZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Venues/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xWZW51ZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/Views/Bookings/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ3NcQ2FuY2VsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/Views/Bookings/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/EventEase/EventEase/Views/Bookings/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/EventEase/EventEase/Views/Events/AdvancedSearch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXEFkdmFuY2VkU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/EventEase/EventEase/Views/Events/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/Views/Events/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/Views/Events/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/EventEase/EventEase/Views/Events/Edit.cshtml]
@@ -77,6 +177,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/user/EventEase/EventEase/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/EventEase/EventEase/publish/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cHVibGlzaFxWaWV3c1xTaGFyZWRcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-cp9mzshyet
 
 [C:/Users/user/EventEase/EventEase/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s

@@ -1,0 +1,16 @@
+@model EventEase.Models.Venue
+
+<h2>Venue Details</h2>
+
+<div>
+    <p><strong>ID:</strong> @Model.VenueId</p>
+    <p><strong>Name:</strong> @Model.Name</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Capacity:</strong> @Model.Capacity</p>
+    <p><strong>Image URL:</strong> @Model.ImageUrl</p>
+    <p><strong>Available:</strong> @(Model.IsAvailable ? "Yes" : "No")</p>
+    <p><strong>Created:</strong> @Model.CreatedAt</p>
+</div>
+
+<a href="/Venues/Edit/@Model.VenueId">Edit</a> |
+<a href="/Venues">Back to List</a>

@@ -17,12 +17,14 @@ public class VenuesController : Controller
         _blobService = blobService;
     }
 
+    // GET: Venues
     public async Task<IActionResult> Index()
     {
         var venues = await _context.Venues.ToListAsync();
         return View(venues);
     }
 
+    // GET: Venues/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return NotFound();
@@ -31,11 +33,13 @@ public class VenuesController : Controller
         return View(venue);
     }
 
+    // GET: Venues/Create
     public IActionResult Create()
     {
         return View();
     }
 
+    // POST: Venues/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Venue venue, IFormFile imageFile)
@@ -56,6 +60,7 @@ public class VenuesController : Controller
         return View(venue);
     }
 
+    // GET: Venues/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null) return NotFound();
@@ -64,6 +69,7 @@ public class VenuesController : Controller
         return View(venue);
     }
 
+    // POST: Venues/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Venue venue, IFormFile imageFile)
@@ -76,7 +82,6 @@ public class VenuesController : Controller
             {
                 if (imageFile != null)
                 {
-                    // Delete old image if exists
                     if (!string.IsNullOrEmpty(venue.ImageUrl))
                     {
                         await _blobService.DeleteImageAsync(venue.ImageUrl);
@@ -98,21 +103,36 @@ public class VenuesController : Controller
         return View(venue);
     }
 
+    // GET: Venues/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null) return NotFound();
-        var venue = await _context.Venues.Include(v => v.Events).FirstOrDefaultAsync(m => m.VenueId == id);
+        
+        var venue = await _context.Venues
+            .Include(v => v.Events)
+            .ThenInclude(e => e.Booking)
+            .FirstOrDefaultAsync(m => m.VenueId == id);
+            
         if (venue == null) return NotFound();
         
         if (venue.Events != null && venue.Events.Any())
         {
-            TempData["Error"] = "Cannot delete venue with existing events!";
+            bool hasBooking = venue.Events.Any(e => e.Booking != null);
+            if (hasBooking)
+            {
+                TempData["Error"] = "Cannot delete venue because it has events with active bookings!";
+            }
+            else
+            {
+                TempData["Error"] = "Cannot delete venue because it has existing events. Delete the events first.";
+            }
             return RedirectToAction(nameof(Index));
         }
         
         return View(venue);
     }
 
+    // POST: Venues/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

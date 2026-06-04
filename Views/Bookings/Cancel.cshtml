@@ -1,0 +1,18 @@
+@model EventEase.Models.Booking
+
+<h2>Cancel Booking</h2>
+
+<h3>Are you sure you want to cancel this booking?</h3>
+
+<div>
+    <p><strong>Booking ID:</strong> @Model.BookingReference</p>
+    <p><strong>Customer:</strong> @Model.CustomerName</p>
+    <p><strong>Event:</strong> @Model.Event?.Name</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="BookingId" />
+    <button type="submit">Yes, Cancel</button>
+    <a href="/Bookings">No, Go Back</a>
+</form>

@@ -1,0 +1,59 @@
+﻿@model EventEase.Models.SearchViewModel
+
+<h2>Advanced Event Search</h2>
+
+<form method="get" asp-action="AdvancedSearch">
+    <div>
+        <label>Event Name/Description:</label>
+        <input asp-for="SearchTerm" />
+    </div>
+    <div>
+        <label>Event Type:</label>
+        <select asp-for="EventTypeId" asp-items="@(new SelectList(Model.EventTypes, "EventTypeId", "TypeName"))">
+            <option value="">-- All --</option>
+        </select>
+    </div>
+    <div>
+        <label>Start Date From:</label>
+        <input asp-for="StartDateFrom" type="date" />
+    </div>
+    <div>
+        <label>Start Date To:</label>
+        <input asp-for="StartDateTo" type="date" />
+    </div>
+    <div>
+        <input asp-for="VenueAvailableOnly" type="checkbox" />
+        <label>Only available venues</label>
+    </div>
+    <button type="submit">Search</button>
+</form>
+
+@if (Model.Events != null)
+{
+    <h3>Results</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Event Type</th>
+                <th>Venue</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Venue Available?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model.Events)
+            {
+                <tr>
+                    <td>@e.Name</td>
+                    <td>@e.EventType?.TypeName</td>
+                    <td>@e.Venue?.Name</td>
+                    <td>@e.StartDate</td>
+                    <td>@e.EndDate</td>
+                    <td>@(e.Venue?.IsAvailable == true ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

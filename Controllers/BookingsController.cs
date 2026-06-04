@@ -14,6 +14,7 @@ public class BookingsController : Controller
         _context = context;
     }
 
+    // GET: Bookings
     public async Task<IActionResult> Index()
     {
         var bookings = await _context.Bookings
@@ -23,24 +24,30 @@ public class BookingsController : Controller
         return View(bookings);
     }
 
+    // GET: Bookings/Search
     public async Task<IActionResult> Search(string searchTerm)
     {
-        var bookings = _context.Bookings
+        ViewBag.SearchTerm = searchTerm;
+        
+        var allBookings = await _context.Bookings
             .Include(b => b.Event)
             .ThenInclude(e => e.Venue)
-            .AsQueryable();
+            .ToListAsync();
         
-        if (!string.IsNullOrEmpty(searchTerm))
+        if (string.IsNullOrEmpty(searchTerm))
         {
-            bookings = bookings.Where(b => 
-                b.BookingReference.Contains(searchTerm) || 
-                b.Event.Name.Contains(searchTerm)
-            );
+            return View("Index", allBookings);
         }
         
-        return View("Index", await bookings.ToListAsync());
+        var filteredBookings = allBookings.Where(b => 
+            (b.BookingReference != null && b.BookingReference.ToLower().Contains(searchTerm.ToLower())) || 
+            (b.Event != null && b.Event.Name != null && b.Event.Name.ToLower().Contains(searchTerm.ToLower()))
+        ).ToList();
+        
+        return View("Index", filteredBookings);
     }
 
+    // GET: Bookings/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return NotFound();
@@ -55,6 +62,7 @@ public class BookingsController : Controller
         return View(booking);
     }
 
+    // GET: Bookings/Create
     public IActionResult Create()
     {
         var availableEvents = _context.Events
@@ -66,6 +74,7 @@ public class BookingsController : Controller
         return View();
     }
 
+    // POST: Bookings/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Booking booking)
@@ -105,6 +114,7 @@ public class BookingsController : Controller
         return View(booking);
     }
 
+    // GET: Bookings/Cancel/5
     public async Task<IActionResult> Cancel(int? id)
     {
         if (id == null) return NotFound();
@@ -118,6 +128,7 @@ public class BookingsController : Controller
         return View(booking);
     }
 
+    // POST: Bookings/Cancel/5
     [HttpPost, ActionName("Cancel")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CancelConfirmed(int id)
